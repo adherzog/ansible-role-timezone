@@ -1,0 +1,9 @@
+---
+- name: set timezone
+  file:
+    name: /etc/localtime
+    src: /usr/share/zoneinfo/{{ timezone }}
+    state: link
+    owner: root
+    group: root
+    force: yes
