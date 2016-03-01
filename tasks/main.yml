@@ -1,5 +1,5 @@
 ---
-- name: set timezone
+- name: symlink localtime to correct timezone
   file:
     name: /etc/localtime
     src: /usr/share/zoneinfo/{{ timezone }}
@@ -7,3 +7,12 @@
     owner: root
     group: root
     force: yes
+
+- name: set sysconfig timezone
+  lineinfile:
+    dest: /etc/sysconfig/clock
+    regexp: ^ZONE=
+    line: ZONE="{{ timezone }}"
+    state: present
+    owner: root
+    group: root
